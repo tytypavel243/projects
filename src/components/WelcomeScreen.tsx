@@ -7,9 +7,22 @@ interface WelcomeScreenProps {
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
   const [text, setText] = useState('');
-  const fullText = 'Полная конфиденциальность, интимная атмосфера и роскошь в центре Москвы. Только для избранных — места исчезают, как тайна. Бронируй, пока никто не узнал...';
+  const [startTyping, setStartTyping] = useState(false);
+  const fullText =
+    'Полная конфиденциальность, интимная атмосфера и роскошь в центре Москвы. Только для избранных — места исчезают, как тайна. Бронируй, пока никто не узнал...';
 
   useEffect(() => {
+    // Ждём 2 секунды перед началом печати
+    const delayTimeout = setTimeout(() => {
+      setStartTyping(true);
+    }, 2000);
+
+    return () => clearTimeout(delayTimeout);
+  }, []);
+
+  useEffect(() => {
+    if (!startTyping) return;
+
     let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex <= fullText.length) {
@@ -21,7 +34,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
     }, 50);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [startTyping]);
 
   return (
     <motion.div
@@ -30,7 +43,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
       exit={{ opacity: 0 }}
       className="relative flex flex-col items-center justify-center min-h-screen p-6 space-y-8 overflow-hidden"
     >
-      {/* Видео-фон с плавным появлением с задержкой */}
+      {/* Видео-фон с плавным появлением */}
       <motion.video
         autoPlay
         muted
@@ -45,17 +58,17 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
         <source src="/background.mp4" type="video/mp4" />
       </motion.video>
 
-      {/* Текст с задержкой появления */}
+      {/* Текст, появляющийся с эффектом печати через 2 секунды */}
       <motion.div
         className="relative text-2xl md:text-4xl text-center font-bold z-10"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, textShadow: ['0 0 10px #fff', '0 0 20px #fff', '0 0 10px #fff'] }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 2, delay: 2 }}
       >
         {text}
       </motion.div>
 
-      {/* Кнопки с задержкой появления */}
+      {/* Кнопки с плавным появлением */}
       <motion.div
         className="relative flex flex-col md:flex-row gap-4 z-10"
         initial={{ opacity: 0, y: 20 }}
