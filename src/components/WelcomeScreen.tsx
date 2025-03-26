@@ -62,8 +62,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
       <motion.div
         className="relative text-2xl md:text-4xl text-center font-bold z-10"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2, delay: 2 }}
+        animate={{
+          textShadow: ['0 0 10px #fff', '0 0 20px #fff', '0 0 10px #fff'],
+        }}
+        transition={{ duration: 2, repeat: Infinity, delay: 2 }}
       >
         {text}
       </motion.div>
