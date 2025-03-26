@@ -30,28 +30,38 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
       exit={{ opacity: 0 }}
       className="relative flex flex-col items-center justify-center min-h-screen p-6 space-y-8 overflow-hidden"
     >
-      <video
+      {/* Видео-фон с плавным появлением с задержкой */}
+      <motion.video
         autoPlay
         muted
         loop
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover blur-sm"
         style={{ filter: 'brightness(0.6)' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 2 }}
       >
         <source src="/background.mp4" type="video/mp4" />
-      </video>
+      </motion.video>
 
+      {/* Текст с задержкой появления */}
       <motion.div
         className="relative text-2xl md:text-4xl text-center font-bold z-10"
-        animate={{
-          textShadow: ['0 0 10px #fff', '0 0 20px #fff', '0 0 10px #fff'],
-        }}
-        transition={{ duration: 2, repeat: Infinity }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, textShadow: ['0 0 10px #fff', '0 0 20px #fff', '0 0 10px #fff'] }}
+        transition={{ duration: 2, delay: 2 }}
       >
         {text}
       </motion.div>
 
-      <div className="relative flex flex-col md:flex-row gap-4 z-10">
+      {/* Кнопки с задержкой появления */}
+      <motion.div
+        className="relative flex flex-col md:flex-row gap-4 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2 }}
+      >
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -69,7 +79,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
         >
           О вечеринке
         </motion.button>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
