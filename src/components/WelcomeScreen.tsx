@@ -62,14 +62,13 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
   className="relative text-2xl md:text-4xl text-center font-bold z-10 text-white"
   initial={{ opacity: 0 }}
   animate={{
-    opacity: 1,
+    opacity: [0.7, 1, 0.7], // Колеблется между 70% и 100%
     textShadow: ['0 0 10px #fff', '0 0 20px #fff', '0 0 10px #fff'],
   }}
   transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 2 }}
 >
   {text}
 </motion.div>
-
 
       {/* Кнопки с плавным появлением */}
       <motion.div
