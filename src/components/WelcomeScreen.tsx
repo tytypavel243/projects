@@ -15,7 +15,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
     // Ждём 2 секунды перед началом печати
     const delayTimeout = setTimeout(() => {
       setStartTyping(true);
-    }, 2000);
+    }, 3500);
 
     return () => clearTimeout(delayTimeout);
   }, []);
