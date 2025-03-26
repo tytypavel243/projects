@@ -58,17 +58,18 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onNavigate }) => {
         <source src="/background.mp4" type="video/mp4" />
       </motion.video>
 
-      {/* Текст, появляющийся с эффектом печати через 2 секунды */}
       <motion.div
-        className="relative text-2xl md:text-4xl text-center font-bold z-10"
-        initial={{ opacity: 0 }}
-        animate={{
-          textShadow: ['0 0 10px #fff', '0 0 20px #fff', '0 0 10px #fff'],
-        }}
-        transition={{ duration: 2, repeat: Infinity, delay: 2 }}
-      >
-        {text}
-      </motion.div>
+  className="relative text-2xl md:text-4xl text-center font-bold z-10 text-white"
+  initial={{ opacity: 0 }}
+  animate={{
+    opacity: 1,
+    textShadow: ['0 0 10px #fff', '0 0 20px #fff', '0 0 10px #fff'],
+  }}
+  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 2 }}
+>
+  {text}
+</motion.div>
+
 
       {/* Кнопки с плавным появлением */}
       <motion.div
